@@ -13,11 +13,13 @@ print(price.dropna())
 import yfinance as yf
 spy_ohlc_df = yf.download('SPY', start='2020-04-30', end='2021-04-30') print(spy_ohlc_df['Adj Close'])
 #Plot & summarize daily prices for Portofolio stock
-price.plot(title='Portfolio Daily Prices', subplots=True); plt.show()
+price.plot(title='Portfolio Daily Prices', subplots=True); 
+plt.show()
 price.describe()
 print(price.describe())
 #Plot & summarize daily prices SP500 Index
-spy_ohlc_df['Adj Close'].plot(title='SP500 Daily') plt.show()
+spy_ohlc_df['Adj Close'].plot(title='SP500 Daily') 
+plt.show()
 price.describe()
 # calculate daily stock_data returns and sp500 returns
 stock_returns = price.pct_change()
