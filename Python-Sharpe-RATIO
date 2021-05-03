@@ -1,0 +1,55 @@
+#Importing required modules
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt import datetime as dt
+#Load the data and Store the stock data
+import pandas_datareader.data as web start = dt.datetime(2020, 4, 30)
+end = dt.datetime(2021, 4, 30) Portfolio = [
+'TSLA', 'F', 'GM','FB','MSFT',
+]
+df = web.DataReader(Portfolio, 'yahoo', start, end) price = df['Adj Close']
+print(price.dropna())
+##Load the data and Store the stock Benchmark data
+import yfinance as yf
+spy_ohlc_df = yf.download('SPY', start='2020-04-30', end='2021-04-30') print(spy_ohlc_df['Adj Close'])
+#Plot & summarize daily prices for Portofolio stock
+price.plot(title='Portfolio Daily Prices', subplots=True); plt.show()
+price.describe()
+print(price.describe())
+#Plot & summarize daily prices SP500 Index
+spy_ohlc_df['Adj Close'].plot(title='SP500 Daily') plt.show()
+price.describe()
+# calculate daily stock_data returns and sp500 returns
+stock_returns = price.pct_change()
+sp_returns = spy_ohlc_df['Adj Close'].pct_change() 
+#plot the daily returns 
+stock_returns.plot(title='Portfolio Returns') 
+plt.show()
+#plot the portfolio returns
+sp_returns.plot(title='SP500 Returns')
+# summarize the daily returns stock_returns.describe()
+sp_returns.describe() print(stock_returns.describe()) print(sp_returns.describe())
+# calculate the difference in daily returns
+excess_returns = stock_returns.sub(sp_returns, axis=0) print(excess_returns)
+# plot the excess_returns excess_returns.plot(title='Excess Returns')
+plt.show()
+# summarize the excess_returns
+excess_returns.describe()
+#The Average Difference in Daily Returns Portfolio vs S&P 500
+avg_excess_return = excess_returns.mean() print(avg_excess_return)
+avg_excess_return.plot.bar(title='Mean of the Return Difference') 
+plt.show()
+#calculate the standard deviations
+sd_excess_return = excess_returns.std()
+print(sd_excess_return)
+#plot the standard deviations
+sd_excess_return.plot.bar(title='Standard Deviation of the Return Difference') 
+plt.show()
+# calculate the daily sharpe ratio
+daily_sharpe_ratio = avg_excess_return.div(sd_excess_return)
+# annualize the sharpe ratio
+annual_factor = np.sqrt(252)
+annual_sharpe_ratio = daily_sharpe_ratio.mul(annual_factor)
+# plot the annualized sharpe ratio
+annual_sharpe_ratio.plot.bar(title='Annualized Sharpe Ratio: Stocks vs S&P 500') 
+plt.show()
