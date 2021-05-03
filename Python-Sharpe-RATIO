@@ -4,14 +4,17 @@ import numpy as np
 import matplotlib.pyplot as plt import datetime as dt
 #Load the data and Store the stock data
 import pandas_datareader.data as web start = dt.datetime(2020, 4, 30)
-end = dt.datetime(2021, 4, 30) Portfolio = [
+end = dt.datetime(2021, 4, 30) 
+Portfolio = [
 'TSLA', 'F', 'GM','FB','MSFT',
 ]
-df = web.DataReader(Portfolio, 'yahoo', start, end) price = df['Adj Close']
+df = web.DataReader(Portfolio, 'yahoo', start, end) 
+price = df['Adj Close']
 print(price.dropna())
 ##Load the data and Store the stock Benchmark data
 import yfinance as yf
-spy_ohlc_df = yf.download('SPY', start='2020-04-30', end='2021-04-30') print(spy_ohlc_df['Adj Close'])
+spy_ohlc_df = yf.download('SPY', start='2020-04-30', end='2021-04-30') 
+print(spy_ohlc_df['Adj Close'])
 #Plot & summarize daily prices for Portofolio stock
 price.plot(title='Portfolio Daily Prices', subplots=True); 
 plt.show()
@@ -30,9 +33,11 @@ plt.show()
 #plot the portfolio returns
 sp_returns.plot(title='SP500 Returns')
 # summarize the daily returns stock_returns.describe()
-sp_returns.describe() print(stock_returns.describe()) print(sp_returns.describe())
+sp_returns.describe() print(stock_returns.describe()) 
+print(sp_returns.describe())
 # calculate the difference in daily returns
-excess_returns = stock_returns.sub(sp_returns, axis=0) print(excess_returns)
+excess_returns = stock_returns.sub(sp_returns, axis=0) 
+print(excess_returns)
 # plot the excess_returns excess_returns.plot(title='Excess Returns')
 plt.show()
 # summarize the excess_returns
