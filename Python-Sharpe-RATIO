@@ -1,9 +1,11 @@
 #Importing required modules
 import pandas as pd
 import numpy as np
-import matplotlib.pyplot as plt import datetime as dt
+import matplotlib.pyplot as plt 
+import datetime as dt
 #Load the data and Store the stock data
-import pandas_datareader.data as web start = dt.datetime(2020, 4, 30)
+import pandas_datareader.data as web 
+start = dt.datetime(2020, 4, 30)
 end = dt.datetime(2021, 4, 30) 
 Portfolio = [
 'TSLA', 'F', 'GM','FB','MSFT',
